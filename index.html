@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>결혼식 사회 대면미팅 일정 조율</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(45deg, #ff6b6b, #ffa8a8);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .form-container {
+            padding: 40px 30px;
+        }
+
+        .intro {
+            background: #f8f9ff;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            border-left: 5px solid #667eea;
+        }
+
+        .intro p {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .intro .highlight {
+            background: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+            font-size: 16px;
+        }
+
+        input[type="text"], input[type="tel"], input[type="date"], input[type="time"], select, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus, input[type="tel"]:focus, input[type="date"]:focus, input[type="time"]:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .radio-group, .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .radio-option, .checkbox-option {
+            display: flex;
+            align-items: center;
+            padding: 16px 20px;
+            border: 2px solid #e8e8e8;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #fff;
+        }
+
+        .radio-option:hover, .checkbox-option:hover {
+            border-color: #667eea;
+            background: #f8f9ff;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.1);
+        }
+
+        .radio-option.selected, .checkbox-option.selected {
+            border-color: #667eea;
+            background: linear-gradient(135deg, #f8f9ff, #f0f4ff);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.15);
+        }
+
+        .radio-option input[type="radio"], .checkbox-option input[type="checkbox"] {
+            margin-right: 12px;
+            transform: scale(1.2);
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .emoji {
+            font-size: 20px;
+            margin-right: 8px;
+        }
+
+        .success-message {
+            display: none;
+            background: #d4edda;
+            color: #155724;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                margin: 10px;
+                border-radius: 15px;
+            }
+            
+            .header, .form-container {
+                padding: 30px 20px;
+            }
+            
+            .intro {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>결혼식 사회 대면미팅 일정 조율</h1>
+            <p>사회자 이용진</p>
+        </div>
+
+        <div class="form-container">
+            <div class="intro">
+                <p><strong>안녕하세요! 사회자 이용진입니다 😊</strong></p>
+                <p>예식이 얼마 남지 않았네요! 두둥...!!</p>
+                <p>대면미팅 일정 조율을 위한 간단한 설문입니다.<br>
+                   질문에 답해주시면, 사회자가 가능한 일정을 리스트업해서 곧 연락드릴게요!</p>
+                
+                <div class="highlight">
+                    <p><span class="emoji">📍</span><strong>장소:</strong> 인천 연수구 송도 내 카페<br>
+                    <span style="color: #888; font-size: 14px;">보통 테크노파크역 인근에서 진행되며, 변경될 수 있습니다.</span></p>
+                    <p><span class="emoji">⏰</span><strong>소요시간:</strong> 약 1시간 내외</p>
+                </div>
+            </div>
+
+            <form id="scheduleForm">
+                <div style="font-size: 13px; color: #999; margin-bottom: 25px; text-align: center; font-style: italic;">
+                    기본 정보를 다시 한 번 확인해주세요 😊
+                </div>
+
+                <div class="form-group">
+                    <label for="name">성함 *</label>
+                    <input type="text" id="name" name="name" required placeholder="계약자분(신랑 혹은 신부님) 성함만 적어주시면 됩니다!">
+                </div>
+
+                <div class="form-group">
+                    <label>결혼식 일정 *</label>
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                        <div style="flex: 1; min-width: 150px;">
+                            <input type="date" id="wedding-date" name="wedding-date" required value="2025-10-01" style="width: 100%;">
+                        </div>
+                        <div style="flex: 1; min-width: 150px;">
+                            <select id="wedding-time" name="wedding-time" required style="width: 100%;">
+                                <option value="">시간을 선택해주세요</option>
+                                <option value="10:00">오전 10:00</option>
+                                <option value="10:10">오전 10:10</option>
+                                <option value="10:20">오전 10:20</option>
+                                <option value="10:30">오전 10:30</option>
+                                <option value="10:40">오전 10:40</option>
+                                <option value="10:50">오전 10:50</option>
+                                <option value="11:00">오전 11:00</option>
+                                <option value="11:10">오전 11:10</option>
+                                <option value="11:20">오전 11:20</option>
+                                <option value="11:30">오전 11:30</option>
+                                <option value="11:40">오전 11:40</option>
+                                <option value="11:50">오전 11:50</option>
+                                <option value="12:00">오후 12:00</option>
+                                <option value="12:10">오후 12:10</option>
+                                <option value="12:20">오후 12:20</option>
+                                <option value="12:30">오후 12:30</option>
+                                <option value="12:40">오후 12:40</option>
+                                <option value="12:50">오후 12:50</option>
+                                <option value="13:00">오후 1:00</option>
+                                <option value="13:10">오후 1:10</option>
+                                <option value="13:20">오후 1:20</option>
+                                <option value="13:30">오후 1:30</option>
+                                <option value="13:40">오후 1:40</option>
+                                <option value="13:50">오후 1:50</option>
+                                <option value="14:00">오후 2:00</option>
+                                <option value="14:10">오후 2:10</option>
+                                <option value="14:20">오후 2:20</option>
+                                <option value="14:30">오후 2:30</option>
+                                <option value="14:40">오후 2:40</option>
+                                <option value="14:50">오후 2:50</option>
+                                <option value="15:00">오후 3:00</option>
+                                <option value="15:10">오후 3:10</option>
+                                <option value="15:20">오후 3:20</option>
+                                <option value="15:30">오후 3:30</option>
+                                <option value="15:40">오후 3:40</option>
+                                <option value="15:50">오후 3:50</option>
+                                <option value="16:00">오후 4:00</option>
+                                <option value="16:10">오후 4:10</option>
+                                <option value="16:20">오후 4:20</option>
+                                <option value="16:30">오후 4:30</option>
+                                <option value="16:40">오후 4:40</option>
+                                <option value="16:50">오후 4:50</option>
+                                <option value="17:00">오후 5:00</option>
+                                <option value="17:10">오후 5:10</option>
+                                <option value="17:20">오후 5:20</option>
+                                <option value="17:30">오후 5:30</option>
+                                <option value="17:40">오후 5:40</option>
+                                <option value="17:50">오후 5:50</option>
+                                <option value="18:00">오후 6:00</option>
+                                <option value="18:10">오후 6:10</option>
+                                <option value="18:20">오후 6:20</option>
+                                <option value="18:30">오후 6:30</option>
+                                <option value="18:40">오후 6:40</option>
+                                <option value="18:50">오후 6:50</option>
+                                <option value="19:00">오후 7:00</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="wedding-hall">웨딩홀 *</label>
+                    <input type="text" id="wedding-hall" name="wedding-hall" required>
+                </div>
+
+                <!-- 구분선 -->
+                <div style="height: 1px; background: linear-gradient(90deg, transparent, #e0e0e0, transparent); margin: 40px 0;"></div>
+
+                <div class="form-group">
+                    <label>미팅 일정 선호일 *</label>
+                    <div style="margin-bottom: 15px; padding: 14px 18px; background: linear-gradient(135deg, #f5f7ff, #e8f0ff); border-radius: 12px; border-left: 4px solid #667eea;">
+                        <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+                            <div style="display: flex; align-items: center; gap: 6px;">
+                                <span style="font-size: 16px;">🌙</span>
+                                <span style="font-size: 14px; color: #667eea; font-weight: 500;">평일 저녁 7시 이후</span>
+                            </div>
+                            <div style="width: 2px; height: 16px; background: #ccc; border-radius: 1px;"></div>
+                            <div style="display: flex; align-items: center; gap: 6px;">
+                                <span style="font-size: 16px;">☀️</span>
+                                <span style="font-size: 14px; color: #667eea; font-weight: 500;">주말 예식 일정에 따라 변동</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" id="flexible" name="preference" value="flexible" required>
+                            <label for="flexible">평일/주말 무관해요</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="weekend-only" name="preference" value="weekend-only" required>
+                            <label for="weekend-only">주말에만 가능해요</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="weekday-only" name="preference" value="weekday-only" required>
+                            <label for="weekday-only">평일에만 가능해요</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="unavailable">기타 요청사항 (선택사항)</label>
+                    <textarea id="unavailable" name="unavailable" rows="3" placeholder="예: 10월 둘째주, 셋째주 평일이 좋아요!"></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    <span class="emoji">✅</span> 제출하기
+                </button>
+            </form>
+
+            <div id="successMessage" class="success-message">
+                <p><strong>제출 완료!</strong> 🎉</p>
+                <p>일정을 확인한 후 개별 연락드리겠습니다. 감사합니다!</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 라디오 버튼과 체크박스 스타일링
+        document.querySelectorAll('.radio-option').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.radio-option').forEach(opt => opt.classList.remove('selected'));
+                this.classList.add('selected');
+                this.querySelector('input[type="radio"]').checked = true;
+            });
+        });
+
+        document.querySelectorAll('.checkbox-option').forEach(option => {
+            option.addEventListener('click', function(e) {
+                if (e.target.type !== 'checkbox') {
+                    const checkbox = this.querySelector('input[type="checkbox"]');
+                    checkbox.checked = !checkbox.checked;
+                }
+                
+                if (this.querySelector('input[type="checkbox"]').checked) {
+                    this.classList.add('selected');
+                } else {
+                    this.classList.remove('selected');
+                }
+            });
+        });
+
+        // 폼 제출 처리
+        document.getElementById('scheduleForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // 폼 데이터 수집
+            const formData = new FormData(this);
+            const data = {};
+            
+            for (let [key, value] of formData.entries()) {
+                if (data[key]) {
+                    if (Array.isArray(data[key])) {
+                        data[key].push(value);
+                    } else {
+                        data[key] = [data[key], value];
+                    }
+                } else {
+                    data[key] = value;
+                }
+            }
+
+            // 여기서 실제로는 서버로 데이터를 전송하거나 다른 처리를 할 수 있습니다
+            console.log('제출된 데이터:', data);
+            
+            // 성공 메시지 표시
+            document.getElementById('scheduleForm').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'block';
+        });
+    </script>
+</body>
+</html>
